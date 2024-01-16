@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Basic State Codelab</string>
+    <string name="you_had_glasses_of_water">You had %1$s glasses of water.</string>
+    <string name="add_a_glass">Add a glass</string>
+    <string name="close">Close</string>
+    <string name="task_1">Task 1</string>
+</resources>
