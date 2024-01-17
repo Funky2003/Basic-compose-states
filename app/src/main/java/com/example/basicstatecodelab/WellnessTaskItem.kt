@@ -5,10 +5,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -19,17 +23,24 @@ import androidx.compose.ui.unit.dp
 fun WellnessTaskItem(
     modifier: Modifier = Modifier,
     onClose: () -> Unit,
-    taskName: Int
+    taskName: String,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit
     ) {
     Row (
         modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ){
         Text(
-            text = stringResource(id = taskName),
+            text = taskName,
             modifier
                 .weight(1f)
                 .padding(start = 16.dp)
+        )
+
+        Checkbox(
+            checked = checked,
+            onCheckedChange = onCheckedChange
         )
         IconButton(onClick = onClose) {
             Icon(
@@ -40,11 +51,20 @@ fun WellnessTaskItem(
     }
 }
 
+@Composable
+fun StatefulWellnessTaskItem( modifier: Modifier = Modifier ) {
+    val checkedState by rememberSaveable { mutableStateOf(false) }
+    WellnessTaskItem(
+        taskName = "Task 1",
+        onClose = {},
+        checked = checkedState,
+        onCheckedChange = {},
+        modifier = modifier
+    )
+}
+
 @Preview(showBackground = true)
 @Composable
 fun WellnessTaskItemPreview() {
-    WellnessTaskItem(
-        taskName = R.string.task_1,
-        onClose = {}
-    )
+    StatefulWellnessTaskItem()
 }
