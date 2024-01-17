@@ -15,9 +15,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun WaterCounter( modifier: Modifier = Modifier ) {
-    var count by rememberSaveable { mutableStateOf(0) }
-
+fun StatelessWaterCounter(
+    modifier: Modifier = Modifier,
+    count: Int,
+    onCount: () -> Unit
+    ) {
     Column (
         modifier = modifier.padding(16.dp)
     ) {
@@ -25,7 +27,7 @@ fun WaterCounter( modifier: Modifier = Modifier ) {
             Text( text = stringResource(R.string.you_had_glasses_of_water, count))
         }
         Button(
-            onClick = { count++ },
+            onClick = onCount,
             modifier.padding(top = 8.dp),
             enabled = count < 10
         ) {
@@ -34,8 +36,18 @@ fun WaterCounter( modifier: Modifier = Modifier ) {
     }
 }
 
+@Composable
+fun StatefulWaterCounter( modifier: Modifier = Modifier ) {
+    var count by rememberSaveable { mutableStateOf(0) }
+    StatelessWaterCounter(
+        count = count,
+        onCount = { count++ },
+        modifier = modifier
+    )
+}
+
 @Preview( showBackground = true )
 @Composable
 fun WaterCounterPreview() {
-    WaterCounter()
+    StatefulWaterCounter()
 }

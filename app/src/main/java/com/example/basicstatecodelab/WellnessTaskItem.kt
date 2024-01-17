@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -19,7 +20,9 @@ import androidx.compose.ui.unit.dp
 fun WellnessTaskItem(
     modifier: Modifier = Modifier,
     onClose: () -> Unit,
-    taskName: Int
+    taskName: Int,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit
     ) {
     Row (
         modifier = modifier.fillMaxWidth(),
@@ -30,6 +33,11 @@ fun WellnessTaskItem(
             modifier
                 .weight(1f)
                 .padding(start = 16.dp)
+        )
+
+        Checkbox(
+            checked = checked,
+            onCheckedChange = onCheckedChange
         )
         IconButton(onClick = onClose) {
             Icon(
@@ -45,6 +53,8 @@ fun WellnessTaskItem(
 fun WellnessTaskItemPreview() {
     WellnessTaskItem(
         taskName = R.string.task_1,
-        onClose = {}
+        onClose = {},
+        checked = false,
+        onCheckedChange = {}
     )
 }
