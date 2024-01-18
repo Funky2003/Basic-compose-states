@@ -10,13 +10,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -42,7 +38,9 @@ fun WellnessTaskItem(
             checked = checked,
             onCheckedChange = onCheckedChange
         )
-        IconButton(onClick = onClose) {
+        IconButton(
+            onClick = onClose
+        ) {
             Icon(
                 imageVector = Icons.Default.Close,
                 contentDescription = stringResource(R.string.close)
@@ -51,20 +49,23 @@ fun WellnessTaskItem(
     }
 }
 
-@Composable
-fun StatefulWellnessTaskItem( modifier: Modifier = Modifier ) {
-    val checkedState by rememberSaveable { mutableStateOf(false) }
-    WellnessTaskItem(
-        taskName = "Task 1",
-        onClose = {},
-        checked = checkedState,
-        onCheckedChange = {},
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun WellnessTaskItemPreview() {
-    StatefulWellnessTaskItem()
-}
+//@Composable
+//fun StatefulWellnessTaskItem(
+//    taskName: String,
+//    onClose: () -> Unit,
+//    modifier: Modifier = Modifier ) {
+//    var isChecked by rememberSaveable { mutableStateOf(false) }
+//    WellnessTaskItem(
+//        taskName = taskName,
+//        onClose = onClose,
+//        checked = isChecked,
+//        onCheckedChange = { newValue -> isChecked = newValue },
+//        modifier = modifier
+//    )
+//}
+//
+//@Preview(showBackground = true)
+//@Composable
+//fun WellnessTaskItemPreview() {
+////    StatefulWellnessTaskItem()
+//}
